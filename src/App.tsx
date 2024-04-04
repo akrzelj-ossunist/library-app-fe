@@ -1,15 +1,18 @@
-import React, { useState } from "react";
-import { useRoutes, Link } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import { useNavigate, useRoutes } from "react-router-dom";
 import Login from "./components/Login";
 import Registration from "./components/Registration";
-import { ILoginCredentials } from "./util/interface";
+import Home from "./components/Home";
+import { LoginContext } from "./components/Layout";
 
 const App: React.FC = () => {
-  const [loginCredentials, setLoginCredentials] = useState<ILoginCredentials>({
-    user: "",
-    jwtToken: ""
-  });
+  const { loginCredentials } = useContext(LoginContext);
+  const navigate = useNavigate();
   const routes = useRoutes([
+    {
+      path: "/home",
+      element: <Home />
+    },
     {
       path: "/login",
       element: <Login />
@@ -19,15 +22,12 @@ const App: React.FC = () => {
       element: <Registration />
     }
   ])
-  return <div className="">
-    <p className="m-4 text-4xl font-bold">App start</p>
-    <div className="flex">
-      <Link to="/"><button className="m-4 px-4 w-auto h-10 rounded-md bg-blue-700 text-white font-bold text-lg">Home</button></Link>
-      <Link to="/login"><button className="m-4 px-4 w-auto h-10 rounded-md bg-blue-700 text-white font-bold text-lg">Login</button></Link>
-      <Link to="/registration"><button className="m-4 px-4 w-auto h-10 rounded-md bg-blue-700 text-white font-bold text-lg">Registration</button></Link>
-    </div>
-    {routes}
-  </div>
+
+  useEffect(() => {
+    loginCredentials.jwtToken !== "" ? navigate("/home") : navigate("/login");
+  }, []);
+  
+  return <div>{routes}</div>
 }
 
 export default App;
