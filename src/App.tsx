@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import { useNavigate, useRoutes } from "react-router-dom";
-import Login from "./components/Login";
-import Registration from "./components/Registration";
-import Home from "./components/Home";
+import Login from "./pages/Login";
+import Registration from "./pages/Registration";
+import Home from "./pages/Home";
 import { LoginContext } from "./components/Layout";
 
 const App: React.FC = () => {

@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { LoginContext } from "./Layout";
+import { LoginContext } from "../components/Layout";
 
 const Home: React.FC = () => {
   const { loginCredentials } = useContext(LoginContext);
