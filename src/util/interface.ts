@@ -11,6 +11,16 @@ export interface ILoginForm {
   password: string
 }
 
+export interface IRegisterForm {
+  fullName: string
+  email: string
+  emailRepeat: string
+  password: string
+  passwordRepeat: string
+  address: string
+  birthday: Date
+}
+
 export interface IJwtPayload extends JwtPayload {
   scope: string
 }

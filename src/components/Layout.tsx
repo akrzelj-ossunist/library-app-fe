@@ -11,9 +11,9 @@ export const LoginContext = createContext<{
   loginCredentials: {
     authority: "",
     user: "",
-    jwtToken: ""
+    jwtToken: "",
   },
-  setLoginCredentials: () => {}
+  setLoginCredentials: () => {},
 });
 
 const Layout: React.FC<{ children: JSX.Element }> = ({ children }) => {
@@ -21,7 +21,7 @@ const Layout: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [loginCredentials, setLoginCredentials] = useState<ILoginCredentials>({
     authority: decodeJwtToken(jwtToken)?.scope || "",
     user: decodeJwtToken(jwtToken)?.sub || "",
-    jwtToken: jwtToken
+    jwtToken: jwtToken,
   });
 
   return (

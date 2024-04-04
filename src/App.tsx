@@ -11,23 +11,23 @@ const App: React.FC = () => {
   const routes = useRoutes([
     {
       path: "/home",
-      element: <Home />
+      element: <Home />,
     },
     {
       path: "/login",
-      element: <Login />
+      element: <Login />,
     },
     {
       path: "/registration",
-      element: <Registration />
-    }
-  ])
+      element: <Registration />,
+    },
+  ]);
 
   useEffect(() => {
     loginCredentials.jwtToken !== "" ? navigate("/home") : navigate("/login");
   }, []);
-  
-  return <div>{routes}</div>
-}
+
+  return <div>{routes}</div>;
+};
 
 export default App;
