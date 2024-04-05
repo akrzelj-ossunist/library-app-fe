@@ -23,9 +23,9 @@ const App: React.FC = () => {
     },
   ]);
 
-  useEffect(() => {
-    loginCredentials.jwtToken !== "" ? navigate("/home") : navigate("/login");
-  }, []);
+  // useEffect(() => {
+  //   loginCredentials.jwtToken !== "" ? navigate("/home") : navigate("/login");
+  // }, [loginCredentials.jwtToken]);
 
   return <div>{routes}</div>;
 };

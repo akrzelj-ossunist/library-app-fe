@@ -1,6 +1,6 @@
 import { IRegisterForm } from "../util/interface";
 import { userRegister } from "../services/userRegister";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { Form, Field, Formik } from "formik";
 
@@ -50,124 +50,143 @@ const Registration: React.FC = () => {
   };
 
   return (
-    <div>
-      <p className="m-5 font-bold text-3xl">This is Registration Page</p>
-      <Formik
-        initialValues={register}
-        validationSchema={registerSchema}
-        onSubmit={(values, actions) => {
-          actions.setSubmitting(false);
-          handleSubmit(values);
-        }}
-      >
-        {({ errors, touched }) => {
-          return (
-            <Form className="my-10 w-[520px] tablet:w-full m-5">
-              <div className="mb-10 flex flex-col w-full">
-                <label>Full name:</label>
-                <Field
-                  className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                  type="text"
-                  name="fullName"
-                />
-                {errors.fullName && touched.fullName && (
-                  <label className="text-sm text-red-500 font-bold">
-                    {errors.fullName}
-                  </label>
-                )}
-              </div>
-              <div className="flex tablet:flex-col w-full justify-between">
-                <div className="flex flex-col mb-10 desktop:mr-10">
-                  <label>Password: </label>
+    <div className="flex w-full absolute -z-10 top-0 h-[100vh] overflow-hidden">
+      <div className="w-2/5 tablet:hidden">
+        <img
+          src="https://media.npr.org/assets/img/2023/12/29/gettyimages-925364372-edit_custom-e8624c50d288b68773b1918dd675fa4c1d787e79.jpg"
+          alt="libraryImg"
+          className="w-full object-cover object-center h-full mr-[5%]"
+        />
+      </div>
+      <div className="w-3/5 tablet:m-0 tablet:w-full flex flex-col mt-28 mx-[7%] overflow-y-auto overflow-x-hidden">
+        <p className="mx-5 tablet:mt-28 font-bold text-3xl">
+          Registration Page
+        </p>
+        <Formik
+          initialValues={register}
+          validationSchema={registerSchema}
+          onSubmit={(values, actions) => {
+            actions.setSubmitting(false);
+            handleSubmit(values);
+          }}>
+          {({ errors, touched }) => {
+            return (
+              <Form className="my-5 w-[520px] tablet:w-full m-5">
+                <div className="mb-10 flex flex-col tablet:mr-10">
+                  <label>Full name:</label>
                   <Field
                     className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                    type="password"
-                    name="password"
+                    type="text"
+                    name="fullName"
                   />
-                  {errors.password && touched.password && (
+                  {errors.fullName && touched.fullName && (
                     <label className="text-sm text-red-500 font-bold">
-                      {errors.password}
+                      {errors.fullName}
                     </label>
                   )}
                 </div>
-                <div className="flex flex-col mb-10">
-                  <label>Repeat password: </label>
+                <div className="flex tablet:flex-col w-full justify-between">
+                  <div className="flex flex-col mb-10 desktop:w-[47%] tablet:mr-10">
+                    <label>Password: </label>
+                    <Field
+                      className="border-b-2 border-black p-2 text-lg focus:outline-none"
+                      type="password"
+                      name="password"
+                    />
+                    {errors.password && touched.password && (
+                      <label className="text-sm text-red-500 font-bold">
+                        {errors.password}
+                      </label>
+                    )}
+                  </div>
+                  <div className="flex flex-col mb-10 tablet:mr-10 desktop:w-[47%]">
+                    <label>Repeat password: </label>
+                    <Field
+                      className="border-b-2 border-black p-2 text-lg focus:outline-none"
+                      type="password"
+                      name="passwordRepeat"
+                    />
+                    {errors.passwordRepeat && touched.passwordRepeat && (
+                      <label className="text-sm text-red-500 font-bold">
+                        {errors.passwordRepeat}
+                      </label>
+                    )}
+                  </div>
+                </div>
+                <div className="flex tablet:flex-col justify-between tablet:mr-10">
+                  <div className="flex flex-col mb-10 desktop:w-[47%] desktop:mr-10">
+                    <label>Email: </label>
+                    <Field
+                      className="border-b-2 border-black p-2 text-lg focus:outline-none"
+                      type="email"
+                      name="email"
+                    />
+                    {errors.email && touched.email && (
+                      <label className="text-sm text-red-500 font-bold">
+                        {errors.email}
+                      </label>
+                    )}
+                  </div>
+                  <div className="flex flex-col desktop:w-[47%] mb-10">
+                    <label>Repeat email: </label>
+                    <Field
+                      className="border-b-2 border-black p-2 text-lg focus:outline-none"
+                      type="email"
+                      name="emailRepeat"
+                    />
+                    {errors.emailRepeat && touched.emailRepeat && (
+                      <label className="text-sm text-red-500 font-bold">
+                        {errors.emailRepeat}
+                      </label>
+                    )}
+                  </div>
+                </div>
+                <div className="flex-col mb-10 flex tablet:mr-10">
+                  <label>Address:</label>
                   <Field
                     className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                    type="password"
-                    name="passwordRepeat"
+                    type="text"
+                    name="address"
                   />
-                  {errors.passwordRepeat && touched.passwordRepeat && (
+                  {errors.address && touched.address && (
                     <label className="text-sm text-red-500 font-bold">
-                      {errors.passwordRepeat}
+                      {errors.address}
                     </label>
                   )}
                 </div>
-              </div>
-              <div className="flex tablet:flex-col justify-between">
-                <div className="flex flex-col mb-10 desktop:mr-10">
-                  <label>Email: </label>
+                <div className="flex flex-col mb-10 w-[50%]">
+                  <label>Birthday: </label>
                   <Field
                     className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                    type="email"
-                    name="email"
+                    type="date"
+                    name="birthday"
                   />
-                  {errors.email && touched.email && (
+                  {errors.birthday && touched.birthday && (
                     <label className="text-sm text-red-500 font-bold">
-                      {errors.email}
+                      You need to fill this box!
                     </label>
                   )}
                 </div>
-                <div className="flex flex-col mb-10">
-                  <label>Repeat email: </label>
-                  <Field
-                    className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                    type="email"
-                    name="emailRepeat"
-                  />
-                  {errors.emailRepeat && touched.emailRepeat && (
-                    <label className="text-sm text-red-500 font-bold">
-                      {errors.emailRepeat}
-                    </label>
-                  )}
+                <div className="flex flex-col">
+                  <button
+                    type="submit"
+                    className="text-white cursor-pointer font-bold w-[200px] rounded-xl text-2xl bg-blue-500 py-3 active:bg-blue-300 shadow-lg">
+                    Register
+                  </button>
+                  <div className="flex items-center mt-2">
+                    <p>Already have account... </p>
+                    <Link
+                      to="/login"
+                      className="text-sm font-bold text-blue-500 underline cursor-pointer ml-1">
+                      Login here
+                    </Link>
+                  </div>
                 </div>
-              </div>
-              <div className="mb-10 flex flex-col w-full">
-                <label>Address:</label>
-                <Field
-                  className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                  type="text"
-                  name="address"
-                />
-                {errors.address && touched.address && (
-                  <label className="text-sm text-red-500 font-bold">
-                    {errors.address}
-                  </label>
-                )}
-              </div>
-              <div className="flex flex-col mb-10 desktop:mr-10">
-                <label>Birthday: </label>
-                <Field
-                  className="border-b-2 border-black p-2 text-lg focus:outline-none"
-                  type="date"
-                  name="birthday"
-                />
-                {errors.birthday && touched.birthday && (
-                  <label className="text-sm text-red-500 font-bold">
-                    You need to fill this box!
-                  </label>
-                )}
-              </div>
-              <button
-                type="submit"
-                className="text-white cursor-pointer font-bold w-[70%] rounded-xl text-2xl bg-blue-500 py-3 active:bg-blue-300 shadow-lg"
-              >
-                Register
-              </button>
-            </Form>
-          );
-        }}
-      </Formik>
+              </Form>
+            );
+          }}
+        </Formik>
+      </div>
     </div>
   );
 };
