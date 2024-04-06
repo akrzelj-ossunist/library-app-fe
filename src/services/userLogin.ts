@@ -9,6 +9,6 @@ export const userLogin = async (loginForm: ILoginForm) => {
         return response.data;
     } catch (error) {
         console.error(error);
-        throw error;
+        return error;
     }
 };

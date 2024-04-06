@@ -4,6 +4,7 @@ import Login from "./pages/Login";
 import Registration from "./pages/Registration";
 import Home from "./pages/Home";
 import { LoginContext } from "./components/Layout";
+import Profile from "./pages/Profile";
 
 const App: React.FC = () => {
   const { loginCredentials } = useContext(LoginContext);
@@ -20,6 +21,10 @@ const App: React.FC = () => {
     {
       path: "/registration",
       element: <Registration />,
+    },
+    {
+      path: "/profile",
+      element: <Profile />,
     },
   ]);
 

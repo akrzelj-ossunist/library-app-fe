@@ -1,14 +1,14 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ILoginForm } from "../util/interface";
 import { userLogin } from "../services/userLogin";
-import decodeJwtToken from "../util/jwtToken";
 import { LoginContext } from "../components/Layout";
 import * as yup from "yup";
 import { Formik, Form, Field } from "formik";
 
 const Login: React.FC = () => {
   const { loginCredentials, setLoginCredentials } = useContext(LoginContext);
+  const [invalidLoginData, setInvalidLoginData] = useState(false);
   const navigate = useNavigate();
   const login: ILoginForm = {
     email: "",
@@ -33,15 +33,19 @@ const Login: React.FC = () => {
   }, [loginCredentials.jwtToken]);
 
   const handleSubmit = async (loginForm: ILoginForm) => {
-    const response = userLogin(loginForm);
-    const decodedToken = decodeJwtToken(await response);
-    const jwtToken = await response;
-    setLoginCredentials({
-      authority: decodedToken?.scope,
-      user: decodedToken?.sub,
-      jwtToken: jwtToken,
-    });
-    localStorage.setItem("jwt", jwtToken);
+    const response = await userLogin(loginForm);
+    const jwtToken = response.token;
+    console.log(response);
+    if (response.success) {
+      setLoginCredentials({
+        success: response.success,
+        user: response.userResDto,
+        jwtToken: jwtToken,
+      });
+      localStorage.setItem("jwt", jwtToken);
+    } else {
+      setInvalidLoginData(true);
+    }
   };
 
   return (
@@ -97,6 +101,11 @@ const Login: React.FC = () => {
                     className="text-white cursor-pointer font-bold w-[200px] rounded-xl text-2xl bg-blue-500 py-3 active:bg-blue-300 shadow-lg">
                     Login
                   </button>
+                  {invalidLoginData && (
+                    <label className="text-sm text-red-500 font-bold">
+                      Invalid email or password!
+                    </label>
+                  )}
                   <div className="flex items-center mt-2">
                     <p>Still dont have account... </p>
                     <Link

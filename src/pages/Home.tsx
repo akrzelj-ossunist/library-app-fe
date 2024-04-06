@@ -7,13 +7,15 @@ const Home: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loginCredentials.jwtToken === "" && navigate("/login");
-  }, [loginCredentials.jwtToken]);
+    !loginCredentials.success && navigate("/login");
+  }, [loginCredentials.success]);
 
   return (
     <>
       <p className="m-4 text-4xl font-bold">Home app</p>
-      <p className="m-4 text-2xl font-bold">Welcome {loginCredentials.user}!</p>
+      <p className="m-4 text-2xl font-bold">
+        Welcome {loginCredentials.user.fullName}!
+      </p>
     </>
   );
 };

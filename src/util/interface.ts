@@ -1,8 +1,17 @@
 import { JwtPayload } from "jwt-decode"
 
+export interface IUser {
+  id: string
+  fullName: string
+  email: string
+  address: string
+  birthday: Date
+  role: string
+}
+
 export interface ILoginCredentials {
-    authority: string | undefined
-    user: string | undefined
+    success: boolean
+    user: IUser
     jwtToken: string
 }
 
